@@ -1,4 +1,4 @@
-package com.codeox.log.codeox.comment.password;
+package com.codeox.log.codeox.commen.password;
 
 /**
  * @autor : duqingqing
