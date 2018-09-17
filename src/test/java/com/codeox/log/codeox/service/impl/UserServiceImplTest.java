@@ -1,6 +1,7 @@
 package com.codeox.log.codeox.service.impl;
 
 import com.codeox.log.codeox.base.service.GenericGenerator;
+import com.codeox.log.codeox.commen.result.Result;
 import com.codeox.log.codeox.domain.Telephone;
 import com.codeox.log.codeox.service.UserService;
 import org.junit.Test;
@@ -21,11 +22,10 @@ public class UserServiceImplTest extends GenericGenerator {
 
     @Test
     public void addUser() {
-        String username = "nimingdaoyou";
-        String password = "nimingdaoyou123456@ni";
-        String phoneNumber = "15093325428";
-        userService.addUser(username,password,phoneNumber);
+        String username = "xiaoming";
+        String password = "123";
+        String phoneNumber = "13803584041";
+        Result result = userService.addUser(username,password,phoneNumber);
+        System.out.println(result);
     }
-
-
 }
