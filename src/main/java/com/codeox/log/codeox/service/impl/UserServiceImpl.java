@@ -1,6 +1,10 @@
 package com.codeox.log.codeox.service.impl;
 
 import com.codeox.log.codeox.base.service.impl.GenericManagerImpl;
+import com.codeox.log.codeox.commen.enums.ResultEnum;
+import com.codeox.log.codeox.commen.password.PasswordTool;
+import com.codeox.log.codeox.commen.result.Result;
+import com.codeox.log.codeox.commen.result.ResultUtil;
 import com.codeox.log.codeox.domain.Telephone;
 import com.codeox.log.codeox.domain.User;
 import com.codeox.log.codeox.repository.TelePhoneRepository;
@@ -28,15 +32,21 @@ public class UserServiceImpl extends GenericManagerImpl<User, Long> implements U
     TelePhoneRepository telePhoneRepository;
 
     @Override
-    public void addUser(String username, String password, String telePhoneNumber) {
+    public Result addUser(String username, String password, String telePhoneNumber) {
         User user = new User();
         user.setUsername(username);
-        user.setPassword(password);
-        Telephone telePhone = new Telephone();
-        telePhone.setTelePhoneNumber(telePhoneNumber);
-        telePhone.setUser(user);
-        telePhoneRepository.save(telePhone);
-        userRepository.save(user);
+        PasswordTool passwordTool = new PasswordTool();
+        if(passwordTool.verifyingLength(password)) {
+            user.setPassword(passwordTool.encodePassword(password));
+            Telephone telePhone = new Telephone();
+            telePhone.setTelePhoneNumber(telePhoneNumber);
+            telePhone.setUser(user);
+            telePhoneRepository.save(telePhone);
+            userRepository.save(user);
+            return ResultUtil.success();
+        }else{
+            return ResultUtil.error(ResultEnum.UNQUALIFIED_PASSWORD);
+        }
     }
 
     @Override
