@@ -22,7 +22,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "user")
 public class User extends BaseEntity{
-    @Column(name="username")
+    @Column(name="username",unique = true)
     private String username;
     @Column(name="psaaword")
     private String password;

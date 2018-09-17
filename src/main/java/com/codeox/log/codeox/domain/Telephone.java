@@ -20,7 +20,7 @@ import javax.persistence.*;
 @Setter
 @ToString
 public class Telephone extends BaseEntity {
-    @Column(name = "telePhoneNumber")
+    @Column(name = "telePhoneNumber",unique = true)
     private String telePhoneNumber;
 
     @ManyToOne
