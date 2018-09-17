@@ -76,7 +76,7 @@ public class ExcelTool {
      */
     public static String readCellValue(Cell cell) {
         if (cell == null) {
-            return "0";
+            return "0.0";
         }
         CellType cellType = cell.getCellTypeEnum();
         switch (cellType) {
@@ -141,7 +141,7 @@ public class ExcelTool {
     @Test
     public void testReadExcel() {
         int[] creditList = {3,3,3,4,3,4,2,1,2,2,3,4,3,3,3,3,3,2,1,1,3};
-        List<List<String>> excelList = ExcelTool.readExcel("D:\\excelTest\\grade.xls", 0);
+        List<List<String>> excelList = ExcelTool.readExcel("D:\\excelTest\\20162.xls", 0);
         for (List oneList : excelList) {
             int mark = 0;
             double sum = 0;
@@ -165,7 +165,6 @@ public class ExcelTool {
                 }
                 mark++;
             }
-            System.out.print("===="+oneList.size());
             System.out.println("总学分：["+creditSum+"]");
             System.out.println("sum : 【"+sum+"】");
             System.out.println("avg : 【"+sum/creditSum+"】");
