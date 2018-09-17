@@ -13,6 +13,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface UserRepository extends GenericDao<User,Long>{
-
-
+    public User findByUsername(String username);
 }

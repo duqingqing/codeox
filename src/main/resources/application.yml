@@ -1,3 +1,4 @@
+#加密配置文件
 jasypt:
   encryptor:
     password: EbfYkitulv73I2p0mXI50JMXoaxZTKJ7
@@ -13,6 +14,14 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+  thymeleaf:
+      prefix: classpath:/templates/
+      check-template-location: true
+      suffix: .html
+      encoding: UTF-8
+      mode: HTML5
+      #开发时关闭缓存,不然没法看到实时页面
+      cache: false
 
   #返回的api接口的配置，全局有效
   jackson:
@@ -20,3 +29,7 @@ spring:
 
 server:
   port: 8083
+
+
+
+

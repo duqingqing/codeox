@@ -33,10 +33,11 @@ public class UserServiceImpl extends GenericManagerImpl<User, Long> implements U
 
     @Override
     public Result addUser(String username, String password, String telePhoneNumber) {
-        User user = new User();
-        user.setUsername(username);
         PasswordTool passwordTool = new PasswordTool();
         if(passwordTool.verifyingLength(password)) {
+            User user = new User();
+            user.setUsername(username);
+            user.setRole("ROLE_USER");
             user.setPassword(passwordTool.encodePassword(password));
             Telephone telePhone = new Telephone();
             telePhone.setTelePhoneNumber(telePhoneNumber);
@@ -50,8 +51,8 @@ public class UserServiceImpl extends GenericManagerImpl<User, Long> implements U
     }
 
     @Override
-    public void changeTelePhone() {
-
+    public User fingUserByUserName(String username){
+        return userRepository.findByUsername(username);
     }
 
 }

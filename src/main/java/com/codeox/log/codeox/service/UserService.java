@@ -14,5 +14,7 @@ import com.codeox.log.codeox.domain.User;
 
 public interface UserService extends GenericManager<User,Long> {
     public Result addUser(String username, String password, String telePhoneNumber);
-    public void changeTelePhone( );
+    public User fingUserByUserName(String username);
+
+
 }
