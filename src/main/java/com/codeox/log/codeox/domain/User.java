@@ -26,6 +26,12 @@ public class User extends BaseEntity{
     private String username;
     @Column(name="psaaword")
     private String password;
-    @Column(name = "role")
-    private String role;
+    @Column(name="blogNumber",columnDefinition = "bigint default 0")
+    private long blogNumber;
+    @Column(name="fans",columnDefinition = "bigint default 0")
+    private long fans;
+    @Column(name="visitors",columnDefinition="bigint default 0")
+    private long visitors;
+    @Column(name="rank",columnDefinition = "bigint default 0")
+    private long rank;
 }

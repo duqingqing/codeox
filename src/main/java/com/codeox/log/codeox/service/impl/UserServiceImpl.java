@@ -37,7 +37,6 @@ public class UserServiceImpl extends GenericManagerImpl<User, Long> implements U
         if(passwordTool.verifyingLength(password)) {
             User user = new User();
             user.setUsername(username);
-            user.setRole("ROLE_USER");
             user.setPassword(passwordTool.encodePassword(password));
             Telephone telePhone = new Telephone();
             telePhone.setTelePhoneNumber(telePhoneNumber);
@@ -55,4 +54,19 @@ public class UserServiceImpl extends GenericManagerImpl<User, Long> implements U
         return userRepository.findByUsername(username);
     }
 
+    @Override
+    @Transactional
+    public Result changeTelephone(User user, String  newTelephoneNumber) {
+        String oldTelephone = telePhoneRepository.findSurvivalTelephone(user).getTelePhoneNumber();
+        if(oldTelephone.equals(newTelephoneNumber)){
+            return ResultUtil.error(ResultEnum.DUPLICATE_PHONE_NUMBERS);
+        }else{
+            telePhoneRepository.changeSurvivalTelephoneToDeath(user);
+            Telephone newTelephone = new Telephone();
+            newTelephone.setTelePhoneNumber(newTelephoneNumber);
+            newTelephone.setUser(user);
+            telePhoneRepository.save(newTelephone);
+            return ResultUtil.success();
+        }
+    }
 }

@@ -33,8 +33,8 @@ public class BaseEntity extends BaseDomain {
     /**
      * 实体是否被删除
      */
-    @Column(name = "DELETED")
-    protected Boolean deleted;
+    @Column(name = "DELETED",columnDefinition = "int default 0")
+    protected int deleted;
 
     @Column(name = "ENTITY_NAME")
     protected String entityName;
@@ -64,7 +64,7 @@ public class BaseEntity extends BaseDomain {
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
-    public Boolean isDeleted() {
+    public int isDeleted() {
         return deleted;
     }
 }
