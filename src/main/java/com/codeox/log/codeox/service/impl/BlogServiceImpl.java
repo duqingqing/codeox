@@ -5,6 +5,7 @@ import com.codeox.log.codeox.commen.enums.ResultEnum;
 import com.codeox.log.codeox.commen.result.Result;
 import com.codeox.log.codeox.commen.result.ResultUtil;
 import com.codeox.log.codeox.domain.Blog;
+import com.codeox.log.codeox.domain.Category;
 import com.codeox.log.codeox.domain.User;
 import com.codeox.log.codeox.repository.BlogRepository;
 import com.codeox.log.codeox.service.BlogService;
@@ -72,6 +73,25 @@ public class BlogServiceImpl extends GenericManagerImpl<Blog, Long> implements B
         blog.setAuthor(user);
         Blog resultBlog = blogRepository.save(blog);
         result = resultBlog != null ? ResultUtil.success() : ResultUtil.error(ResultEnum.BLOG_ADD_ERROR);
+        return result;
+    }
+
+    /**
+     * @Description: 批量修改博客的分类
+     * @Param: category : 博客的分类 blogList : 博客数组
+     * @return: Result
+     * @Date: 2018/9/30 0030
+     */
+    @Override
+    public Result updateCategory(Category category, List<Blog> blogList) {
+        Result result = null;
+        int resultNumberSum = 0;
+        int length = blogList.size();
+        for (Blog blog : blogList) {
+            int resultNumber = blogRepository.updateCategory(category, blog.getId());
+            resultNumberSum += resultNumber;
+        }
+        result = resultNumberSum >= length ? ResultUtil.success() : ResultUtil.error(ResultEnum.BLOG_UPDATE_CATEGORY_ERROR);
         return result;
     }
 }

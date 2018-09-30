@@ -7,6 +7,8 @@ package com.codeox.log.codeox.commen.enums;
  * @package: com.codeox.log.codeox.commen.enums
  */
 public enum ResultEnum {
+    BLOG_UPDATE_CATEGORY_ERROR(-9,"批量修改博客类别错误"),
+    CATEGORY_ADD_ERROR(-8,"添加类别失败"),
     STAR_UPDATE_ERROR(-7,"点赞失败"),
     COMMENT_ADD_ERROR(-6,"评论添加失败"),
     BLOG_ADD_ERROR(-5, "添加博客失败"),

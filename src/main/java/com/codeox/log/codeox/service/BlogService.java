@@ -3,6 +3,7 @@ package com.codeox.log.codeox.service;
 import com.codeox.log.codeox.base.service.GenericManager;
 import com.codeox.log.codeox.commen.result.Result;
 import com.codeox.log.codeox.domain.Blog;
+import com.codeox.log.codeox.domain.Category;
 import com.codeox.log.codeox.domain.User;
 import org.springframework.data.repository.query.Param;
 
@@ -22,5 +23,6 @@ public interface BlogService extends GenericManager<Blog,Long> {
     Result updateContent(Blog blog, String content);
     Result updateReaders(Blog blog);
     Result addBlog(User user,String title,String content);
+    Result updateCategory(Category category,List<Blog> blogList);
 
 }

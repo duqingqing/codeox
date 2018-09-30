@@ -3,6 +3,7 @@ package com.codeox.log.codeox.repository;
 import com.codeox.log.codeox.base.dao.GenericDao;
 import com.codeox.log.codeox.commen.result.Result;
 import com.codeox.log.codeox.domain.Blog;
+import com.codeox.log.codeox.domain.Category;
 import com.codeox.log.codeox.domain.User;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -38,6 +39,10 @@ public interface BlogRepository extends GenericDao<Blog,Long> {
     @Modifying
     @Query(value = "update Blog b set b.readers = b.readers+1 where b=:blog")
     int updateReaders(@Param(value = "blog") Blog blog);
+
+    @Modifying
+    @Query(value = "update Blog blog set blog.category =:category where blog.id=:id")
+    int updateCategory(@Param(value = "category") Category category,@Param(value = "id") Long id);
 
 
 

@@ -13,20 +13,24 @@ import javax.persistence.*;
  * @time: 14:47
  * @package: com.codeox.log.codeox.domain
  */
-@Table(name="blog")
+@Table(name = "blog")
 @Entity
 @Setter
 @Getter
 @ToString
 public class Blog extends BaseEntity {
-    @Column(name="title")
+    @Column(name = "title")
     private String title;
-    @Column(name="content",columnDefinition="LONGTEXT")
+    @Column(name = "content", columnDefinition = "LONGTEXT")
     private String content;
     @ManyToOne
-    @JoinColumn (name="authorId")
+    @JoinColumn(name = "authorId")
     private User author;
-    @Column(name="readers",columnDefinition="bigint default 0")
+    @Column(name = "readers", columnDefinition = "bigint default 0")
     private long readers;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
 
 }
