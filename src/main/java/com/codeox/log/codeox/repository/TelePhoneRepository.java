@@ -18,9 +18,11 @@ import javax.transaction.Transactional;
 @Repository
 @Transactional
 public interface TelePhoneRepository extends GenericDao<Telephone,Long> {
+
     @Query(value = "select telePhone from Telephone telePhone where telePhone.user=?1 and telePhone.deleted <>1")
     Telephone findSurvivalTelephone(User user);
-    @Query(value = "update Telephone tele set tele.deleted=1 where tele.user=?1")
+
     @Modifying
+    @Query(value = "update Telephone tele set tele.deleted=1 where tele.user=?1")
     int changeSurvivalTelephoneToDeath(User user);
 }

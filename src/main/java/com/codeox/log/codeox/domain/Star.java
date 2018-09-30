@@ -22,14 +22,14 @@ import java.util.List;
 @ToString
 public class Star extends BaseEntity{
 
-    @Column(name="stars",columnDefinition = "biging default 0")
-    private long starNumber;
+    @Column(name="status",columnDefinition = "binary default 0",nullable = false)
+    private int status;
 
-    @OneToOne(cascade=CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinColumn(name="userID")
+    @OneToOne
+    @JoinColumn(name="author_id")
     private User user;
 
-    @ManyToOne(cascade=CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinColumn(name="blogID")
+    @ManyToOne
+    @JoinColumn(name="article_id")
     private Blog blog;
 }

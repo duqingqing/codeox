@@ -22,11 +22,11 @@ public class Comment extends BaseEntity {
     @Column(name="content",columnDefinition = "LONGTEXT")
     private String content;
 
-    @ManyToOne(cascade=CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinColumn(name = "blogId")
+    @ManyToOne
+    @JoinColumn(name = "article_id")
     private Blog blog;
 
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinColumn(name="userId")
+    @ManyToOne
+    @JoinColumn(name="author_id")
     private User user;
 }

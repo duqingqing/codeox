@@ -5,9 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * @autor : duqingqing
@@ -25,7 +23,8 @@ public class Blog extends BaseEntity {
     private String title;
     @Column(name="content",columnDefinition="LONGTEXT")
     private String content;
-    @Column(name="author")
+    @ManyToOne
+    @JoinColumn (name="authorId")
     private User author;
     @Column(name="readers",columnDefinition="bigint default 0")
     private long readers;
