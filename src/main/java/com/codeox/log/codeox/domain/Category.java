@@ -4,10 +4,6 @@ import com.codeox.log.codeox.base.domain.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.annotations.GenericGenerator;
-import org.junit.experimental.theories.suppliers.TestedOn;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

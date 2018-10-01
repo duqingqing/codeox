@@ -2,7 +2,6 @@ package com.codeox.log.codeox.service;
 
 import com.codeox.log.codeox.base.service.GenericManager;
 import com.codeox.log.codeox.commen.result.Result;
-import com.codeox.log.codeox.domain.Telephone;
 import com.codeox.log.codeox.domain.User;
 
 /**

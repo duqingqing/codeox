@@ -10,7 +10,6 @@ import com.codeox.log.codeox.service.StarService;
 import com.codeox.log.codeox.service.UserService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 /**
  * @autor : duqingqing

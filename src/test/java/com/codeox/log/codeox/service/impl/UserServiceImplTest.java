@@ -7,9 +7,6 @@ import com.codeox.log.codeox.service.UserService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.ArrayList;
-import java.util.List;
-
 
 /**
  * @autor : duqingqing

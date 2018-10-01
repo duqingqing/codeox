@@ -19,9 +19,21 @@ import javax.transaction.Transactional;
 @Transactional
 public interface TelePhoneRepository extends GenericDao<Telephone,Long> {
 
+    /**
+    * @Description: 查找用户当前使用的电话号码
+    * @Param: User user
+    * @return: Telephone
+    * @Date: 2018/9/30 0030
+    */ 
     @Query(value = "select telePhone from Telephone telePhone where telePhone.user=?1 and telePhone.deleted <>1")
     Telephone findSurvivalTelephone(User user);
 
+    /**
+    * @Description: 把当前用户使用的电话号的delete=1
+    * @Param: User user
+    * @return: int
+    * @Date: 2018/9/30 0030
+    */ 
     @Modifying
     @Query(value = "update Telephone tele set tele.deleted=1 where tele.user=?1")
     int changeSurvivalTelephoneToDeath(User user);

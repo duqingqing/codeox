@@ -25,21 +25,40 @@ import java.util.List;
 @Component
 @Transactional
 public class BlogServiceImpl extends GenericManagerImpl<Blog, Long> implements BlogService {
+
     @Autowired
     private BlogRepository blogRepository;
     @Autowired
     private UserService userService;
 
+    /**
+     * @Description: 通过 title 模糊查寻 blog
+     * @Param: String title
+     * @return: List<Blog>
+     * @Date: 2018/9/30 0030
+     */
     @Override
     public List<Blog> findBlogsByTitleLike(String title) {
         return blogRepository.findBlogsByTitleLike(title);
     }
 
+    /**
+     * @Description: 通过author 查找 博客
+     * @Param:User author
+     * @return: List<blog>
+     * @Date: 2018/9/30 0030
+     */
     @Override
     public List<Blog> findBlogsByAuthor(User author) {
         return blogRepository.findBlogsByAuthor(author);
     }
 
+    /**
+     * @Description: 修改博客标题
+     * @Param: Blog blog, String title : 新的标题
+     * @return: Result
+     * @Date: 2018/9/30 0030
+     */
     @Override
     public Result updateTitle(Blog blog, String title) {
         Result result;
@@ -48,6 +67,12 @@ public class BlogServiceImpl extends GenericManagerImpl<Blog, Long> implements B
         return result;
     }
 
+    /**
+     * @Description: 修改博客内容
+     * @Param: Blog blog, String content : 新的内容
+     * @return: Result
+     * @Date: 2018/9/30 0030
+     */
     @Override
     public Result updateContent(Blog blog, String content) {
         Result result;
@@ -56,6 +81,12 @@ public class BlogServiceImpl extends GenericManagerImpl<Blog, Long> implements B
         return result;
     }
 
+    /**
+     * @Description: 添加博客阅读数量
+     * @Param: Blog blog
+     * @return: Result
+     * @Date: 2018/9/30 0030
+     */
     @Override
     public Result updateReaders(Blog blog) {
         Result result;
@@ -64,6 +95,12 @@ public class BlogServiceImpl extends GenericManagerImpl<Blog, Long> implements B
         return result;
     }
 
+    /**
+     * @Description: 添加博客
+     * @Param: User user, String title, String content
+     * @return: Result
+     * @Date: 2018/9/30 0030
+     */
     @Override
     public Result addBlog(User user, String title, String content) {
         Result result = null;

@@ -23,6 +23,12 @@ public class CommentServiceImpl extends GenericManagerImpl<Comment, Long> implem
     @Autowired
     private CommentRepository commentRepository;
 
+    /**
+    * @Description: 添加评论
+    * @Param: Blog blog : 评论的博客 User user: 平论用户 String content: 评论内容
+    * @return: Result
+    * @Date: 2018/9/30 0030
+    */ 
     @Override
     public Result addComment(Blog blog, User user, String content) {
         Result result = null;

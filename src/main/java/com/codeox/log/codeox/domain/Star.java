@@ -4,10 +4,8 @@ import com.codeox.log.codeox.base.domain.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.junit.ClassRule;
 
 import javax.persistence.*;
-import java.util.List;
 
 /**
  * @autor : duqingqing

@@ -1,7 +1,6 @@
 package com.codeox.log.codeox.domain;
 
 import com.codeox.log.codeox.base.domain.BaseEntity;
-import com.fasterxml.jackson.databind.ser.Serializers;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

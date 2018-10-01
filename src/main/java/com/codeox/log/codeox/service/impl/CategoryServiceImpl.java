@@ -10,8 +10,6 @@ import com.codeox.log.codeox.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.Column;
-
 /**
  * @autor : duqingqing
  * @data : 2018/9/30 0030
@@ -23,6 +21,12 @@ public class CategoryServiceImpl extends GenericManagerImpl<Category, Long> impl
     @Autowired
     private CategoryRepository categoryRepository;
 
+    /**
+     * @Description: 添加博客分类
+     * @Param: String name : 分类名
+     * @return: Result
+     * @Date: 2018/9/30 0030
+     */
     @Override
     public Result addCayegory(String name) {
         Result result = null;
@@ -33,6 +37,12 @@ public class CategoryServiceImpl extends GenericManagerImpl<Category, Long> impl
         return result;
     }
 
+    /**
+     * @Description: 通过名字返回一个category
+     * @Param: String name
+     * @return: Category
+     * @Date: 2018/9/30 0030
+     */
     @Override
     public Category findByName(String name) {
         return this.categoryRepository.findByName(name);

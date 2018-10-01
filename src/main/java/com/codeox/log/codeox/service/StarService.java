@@ -5,9 +5,6 @@ import com.codeox.log.codeox.commen.result.Result;
 import com.codeox.log.codeox.domain.Blog;
 import com.codeox.log.codeox.domain.Star;
 import com.codeox.log.codeox.domain.User;
-import com.codeox.log.codeox.repository.StarRepository;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 
 /**
  * @autor : duqingqing

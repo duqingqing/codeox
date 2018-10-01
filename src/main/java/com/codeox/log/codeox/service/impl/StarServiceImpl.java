@@ -9,7 +9,6 @@ import com.codeox.log.codeox.domain.Star;
 import com.codeox.log.codeox.domain.User;
 import com.codeox.log.codeox.repository.StarRepository;
 import com.codeox.log.codeox.service.StarService;
-import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -26,6 +25,12 @@ public class StarServiceImpl extends GenericManagerImpl<Star, Long> implements S
     @Autowired
     private StarRepository starRepository;
 
+    /**
+    * @Description: 点赞函数 通过读取数据库中的Star.status（二进制）实现状态转换
+    * @Param: Blog blog: 被点赞的博客 User user :点赞用户
+    * @return: Result
+    * @Date: 2018/9/30 0030
+    */ 
     @Override
     @Transactional
     public Result pressStar(Blog blog, User user) {
