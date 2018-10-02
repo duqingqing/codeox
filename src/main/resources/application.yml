@@ -23,10 +23,17 @@ spring:
     enabled: true
     encoding: utf-8
     mode: HTML5
+  mvc:
+    static-path-pattern: /**
+  security:
+    basic:
+     enabled : false
+    user:
+      name: admin
+      password: 123456
+
 
 server:
   port: 8083
-
-
 
 

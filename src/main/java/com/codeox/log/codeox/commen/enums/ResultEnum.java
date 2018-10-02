@@ -7,12 +7,14 @@ package com.codeox.log.codeox.commen.enums;
  * @package: com.codeox.log.codeox.commen.enums
  */
 public enum ResultEnum {
-    BLOG_UPDATE_CATEGORY_ERROR(-9,"批量修改博客类别错误"),
-    CATEGORY_ADD_ERROR(-8,"添加类别失败"),
-    STAR_UPDATE_ERROR(-7,"点赞失败"),
-    COMMENT_ADD_ERROR(-6,"评论添加失败"),
+    ADMIN_UPDATE_ENTRY_INFO_ERROR(-11,"更新登入信息失败"),
+    ADMIN_ADD_ERROR(-10, "添加管理员失败"),
+    BLOG_UPDATE_CATEGORY_ERROR(-9, "批量修改博客类别失败"),
+    CATEGORY_ADD_ERROR(-8, "添加类别失败"),
+    STAR_UPDATE_ERROR(-7, "点赞失败"),
+    COMMENT_ADD_ERROR(-6, "评论添加失败"),
     BLOG_ADD_ERROR(-5, "添加博客失败"),
-    BLOG_UPDATE_ERROR(-4, "博客更新错误"),
+    BLOG_UPDATE_ERROR(-4, "博客更新失败"),
     UNQUALIFIED_PASSWORD(-3, "    不合格的密码"),
     DUPLICATE_PHONE_NUMBERS(-2, "重复的电话号码"),
     UNKNOW_ERROR(-1, "未知错误"),
