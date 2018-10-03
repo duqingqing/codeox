@@ -2,7 +2,9 @@ package com.codeox.log.codeox.controller;
 
 import com.codeox.log.codeox.ueditor.ActionEnter;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,11 +18,14 @@ import java.io.PrintWriter;
  * @package: com.codeox.log.codeox.controller
  */
 @Controller
-@RequestMapping(value ="/ueditor")
+@RequestMapping(value = "/ueditor")
 public class UEditorController {
-    @RequestMapping("/")
-    private String editPage() {
-        return "ueditor";
+
+
+    @GetMapping("/")
+    private ModelAndView editPage(ModelAndView modelAndView) {
+        modelAndView.setViewName("ueditor/ueditor");
+        return modelAndView;
     }
 
     @RequestMapping(value = "/config")

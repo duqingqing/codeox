@@ -7,6 +7,8 @@ package com.codeox.log.codeox.commen.enums;
  * @package: com.codeox.log.codeox.commen.enums
  */
 public enum ResultEnum {
+    USER_PASSWORD_ERROR(-15,"用户密码错误"),
+    USER_ACCOUNT_ERROR(-14,"用户账号错误"),
     ADMIN_PASSWORD_ERROR(-13,"管理员密码错误"),
     ADMIN_ACCOUNT_ERROR(-12,"该账户不管理员"),
     ADMIN_UPDATE_ENTRY_INFO_ERROR(-11,"更新登入信息失败"),
