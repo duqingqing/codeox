@@ -8,9 +8,11 @@ import com.codeox.log.codeox.domain.Admin;
 import com.codeox.log.codeox.service.AdminService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -41,7 +43,7 @@ public class AdminControlller {
      */
     @GetMapping({"/", "/index", "/login"})
     public ModelAndView index(ModelAndView modelAndView, HttpSession httpSession) {
-        Object object = httpSession.getAttribute("name");
+        Object object = httpSession.getAttribute("username");
         String result;
         if (object == null) {
             modelAndView.setViewName("admin/login");
@@ -74,15 +76,31 @@ public class AdminControlller {
         String decodePassword = passwordTool.decodePassword(adminPassword);
         if (decodePassword.equals(password)) {
             //添加登入信息
-            session.setAttribute("name", username);
+            session.setAttribute("username", username);
             session.setAttribute("entryNumber", admin.getEntryNumber() + 1);
             session.setAttribute("lastEntry", admin.getLastEntry());
             adminService.updateLastEntry(admin);
-            modelAndView.setViewName("/admin/index");
+            return new ModelAndView("redirect:/admin/index");
         } else {
             map.put("msg", ResultUtil.error(ResultEnum.ADMIN_PASSWORD_ERROR));
             modelAndView.setViewName("/common/error");
         }
+        return modelAndView;
+    }
+
+    /**
+     * @Description: 管理员登出
+     * @Param: modelAndView
+     * @Param: httpSession
+     * @return: ModelAndView
+     * @Date: 2018/10/3 0003
+     */
+    @GetMapping("/logout")
+    public ModelAndView quit(ModelAndView modelAndView, HttpSession httpSession) {
+        httpSession.removeAttribute("username");
+        httpSession.removeAttribute("entryNumber");
+        httpSession.removeAttribute("lastEntry");
+        modelAndView.setViewName("redirect:/admin/login");
         return modelAndView;
     }
 
