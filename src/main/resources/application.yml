@@ -25,12 +25,6 @@ spring:
     mode: HTML5
   mvc:
     static-path-pattern: /**
-  security:
-    basic:
-     enabled : false
-    user:
-      name: admin
-      password: 123456
 
 
 server:

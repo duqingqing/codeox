@@ -1,20 +1,21 @@
 package com.codeox.log.codeox.controller;
 
 
+import com.codeox.log.codeox.commen.enums.ResultEnum;
 import com.codeox.log.codeox.commen.password.PasswordTool;
+import com.codeox.log.codeox.commen.result.ResultUtil;
 import com.codeox.log.codeox.domain.Admin;
 import com.codeox.log.codeox.service.AdminService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 
 /**
@@ -39,21 +40,16 @@ public class AdminControlller {
      * @Date: 2018/10/2 0002
      */
     @GetMapping({"/", "/index", "/login"})
-    public String index(ModelAndView modelAndView, HttpSession httpSession) {
+    public ModelAndView index(ModelAndView modelAndView, HttpSession httpSession) {
         Object object = httpSession.getAttribute("name");
-        String result = "";
+        String result;
         if (object == null) {
-            result = "/admin/login";
+            modelAndView.setViewName("admin/login");
         } else {
-            result = "/admin/index";
+            modelAndView.setViewName("admin/index");
         }
-        return result;
+        return modelAndView;
     }
-
-//    @GetMapping("/login")
-//    public String login() {
-//        return "/admin/login";
-//    }
 
     /**
      * @Description: 管理员登入
@@ -61,31 +57,31 @@ public class AdminControlller {
      * @return:
      * @Date: 2018/10/2 0002
      */
-    @RequestMapping (value = "/login/action",method = RequestMethod.POST)
-    public ModelAndView login(HttpServletRequest request) {
+    @RequestMapping(value = "/login/action", method = RequestMethod.POST)
+    public ModelAndView login(HttpServletRequest request, ModelAndView modelAndView, Map<String, Object> map, @RequestParam(value = "username") String username, @RequestParam(value = "password") String password) {
         //解密工具
         PasswordTool passwordTool = new PasswordTool();
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("admin/login");
         HttpSession session = request.getSession();
-        //从表单获取名字和密码
-        String name = request.getParameter("username");
-        String password = request.getParameter("password");
-        log.info("【登入名】" + name);
-        log.info("【密码】" + password);
 
         //获取admin实例
-        Admin admin = adminService.findByName(name);
+        Admin admin = adminService.findByName(username);
+        if (admin == null) {
+            map.put("msg", ResultUtil.error(ResultEnum.ADMIN_ACCOUNT_ERROR));
+            modelAndView.setViewName("/common/error");
+            return modelAndView;
+        }
         String adminPassword = admin.getPassword();
         String decodePassword = passwordTool.decodePassword(adminPassword);
-        log.info("【数据库密码】" + decodePassword);
         if (decodePassword.equals(password)) {
             //添加登入信息
-            session.setAttribute("name", name);
+            session.setAttribute("name", username);
             session.setAttribute("entryNumber", admin.getEntryNumber() + 1);
             session.setAttribute("lastEntry", admin.getLastEntry());
             adminService.updateLastEntry(admin);
-            modelAndView.setViewName("admin/index");
+            modelAndView.setViewName("/admin/index");
+        } else {
+            map.put("msg", ResultUtil.error(ResultEnum.ADMIN_PASSWORD_ERROR));
+            modelAndView.setViewName("/common/error");
         }
         return modelAndView;
     }
