@@ -4,9 +4,6 @@ import com.codeox.log.codeox.Interceptor.UserInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-
-import javax.servlet.http.HttpSession;
 
 /**
  * @autor : duqingqing
@@ -17,12 +14,10 @@ import javax.servlet.http.HttpSession;
 @Configuration
 public class InterceptorConfig implements WebMvcConfigurer {
 
-    private HttpSession httpSession;
-
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         //这里可以添加多个拦截器
-        registry.addInterceptor(new UserInterceptor()).addPathPatterns("/ueditor");
+        registry.addInterceptor(new UserInterceptor()).addPathPatterns("/ueditor/*");
     }
 }
 

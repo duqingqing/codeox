@@ -25,6 +25,12 @@ public class StarServiceImpl extends GenericManagerImpl<Star, Long> implements S
     @Autowired
     private StarRepository starRepository;
 
+    @Autowired
+    public void setStarRepository(StarRepository starRepository) {
+        this.starRepository = starRepository;
+        this.dao = this.starRepository;
+    }
+
     /**
     * @Description: 点赞函数 通过读取数据库中的Star.status（二进制）实现状态转换
     * @Param: Blog blog: 被点赞的博客 User user :点赞用户

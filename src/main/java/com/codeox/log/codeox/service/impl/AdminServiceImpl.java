@@ -22,8 +22,13 @@ import java.util.Date;
  */
 @Component
 public class AdminServiceImpl extends GenericManagerImpl<Admin, Long> implements AdminService {
-    @Autowired
+
     private AdminRepository adminRepository;
+    @Autowired
+    public void setAdminRepository(AdminRepository adminRepository) {
+        this.adminRepository = adminRepository;
+        this.dao = this.adminRepository;
+    }
 
     /**
      * @Description: 添加管理员

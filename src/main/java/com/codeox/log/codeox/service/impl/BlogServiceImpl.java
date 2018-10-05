@@ -10,7 +10,10 @@ import com.codeox.log.codeox.domain.User;
 import com.codeox.log.codeox.repository.BlogRepository;
 import com.codeox.log.codeox.service.BlogService;
 import com.codeox.log.codeox.service.UserService;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
@@ -26,10 +29,21 @@ import java.util.List;
 @Transactional
 public class BlogServiceImpl extends GenericManagerImpl<Blog, Long> implements BlogService {
 
-    @Autowired
+
     private BlogRepository blogRepository;
-    @Autowired
+
     private UserService userService;
+
+    @Autowired
+    public void setBlogRepository(BlogRepository blogRepository) {
+        this.blogRepository = blogRepository;
+        this.dao = this.blogRepository;
+    }
+
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
 
     /**
      * @Description: 通过 title 模糊查寻 blog
@@ -60,6 +74,7 @@ public class BlogServiceImpl extends GenericManagerImpl<Blog, Long> implements B
      * @Date: 2018/9/30 0030
      */
     @Override
+    @Transactional
     public Result updateTitle(Blog blog, String title) {
         Result result;
         int status = blogRepository.updateTitle(blog, title);
@@ -74,6 +89,7 @@ public class BlogServiceImpl extends GenericManagerImpl<Blog, Long> implements B
      * @Date: 2018/9/30 0030
      */
     @Override
+    @Transactional
     public Result updateContent(Blog blog, String content) {
         Result result;
         int status = blogRepository.updateContent(blog, content);
@@ -88,9 +104,11 @@ public class BlogServiceImpl extends GenericManagerImpl<Blog, Long> implements B
      * @Date: 2018/9/30 0030
      */
     @Override
-    public Result updateReaders(Blog blog) {
+    @Transactional
+    @Async
+    public Result updateReaders(Long id) {
         Result result;
-        int status = blogRepository.updateReaders(blog);
+        int status = blogRepository.updateReaders(id);
         result = status > 0 ? ResultUtil.success() : ResultUtil.error(ResultEnum.BLOG_UPDATE_ERROR);
         return result;
     }
@@ -104,10 +122,19 @@ public class BlogServiceImpl extends GenericManagerImpl<Blog, Long> implements B
     @Override
     public Result addBlog(User user, String title, String content) {
         Result result = null;
+        String preview = "";
         Blog blog = new Blog();
         blog.setTitle(title);
         blog.setContent(content);
         blog.setAuthor(user);
+        Document document = Jsoup.parse(content);
+        String stringDocument = document.text();
+        if (stringDocument.length() > 200) {
+            preview = stringDocument.substring(0, 200);
+        } else {
+            preview = stringDocument.substring(0, stringDocument.length());
+        }
+        blog.setPreview(preview);
         Blog resultBlog = blogRepository.save(blog);
         result = resultBlog != null ? ResultUtil.success() : ResultUtil.error(ResultEnum.BLOG_ADD_ERROR);
         return result;
@@ -120,6 +147,7 @@ public class BlogServiceImpl extends GenericManagerImpl<Blog, Long> implements B
      * @Date: 2018/9/30 0030
      */
     @Override
+    @Transactional
     public Result updateCategory(Category category, List<Blog> blogList) {
         Result result = null;
         int resultNumberSum = 0;
@@ -129,6 +157,30 @@ public class BlogServiceImpl extends GenericManagerImpl<Blog, Long> implements B
             resultNumberSum += resultNumber;
         }
         result = resultNumberSum >= length ? ResultUtil.success() : ResultUtil.error(ResultEnum.BLOG_UPDATE_CATEGORY_ERROR);
+        return result;
+    }
+
+    /**
+     * @Description: 提取博客的概括
+     * @Param: blog 需处理的博客
+     * @return: Result
+     * @Date: 2018/10/5 0005
+     */
+    @Override
+    @Transactional
+    public Result updatePreview(Blog blog) {
+        String preview;
+        Result result;
+        String content = blog.getContent();
+        Document document = Jsoup.parse(content);
+        String stringDocument = document.text();
+        if (stringDocument.length() > 200) {
+            preview = stringDocument.substring(0, 200);
+        } else {
+            preview = stringDocument.substring(0, stringDocument.length());
+        }
+        int status = blogRepository.updatePreview(preview, blog);
+        result = status > 0 ? ResultUtil.success() : ResultUtil.error(ResultEnum.BLOG_UPDATE_ERROR);
         return result;
     }
 }

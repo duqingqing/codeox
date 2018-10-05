@@ -20,8 +20,9 @@ public interface BlogService extends GenericManager<Blog,Long> {
     List<Blog> findBlogsByAuthor(User author);
     Result updateTitle(Blog blog, String title);
     Result updateContent(Blog blog, String content);
-    Result updateReaders(Blog blog);
+    Result updateReaders(Long id);
     Result addBlog(User user,String title,String content);
     Result updateCategory(Category category,List<Blog> blogList);
+    Result updatePreview(Blog blog);
 
 }

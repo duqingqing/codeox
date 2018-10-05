@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html xmlns: th="http://www.thymeleaf.org">
-<html>
 <head>
     <title>CodeOX-Index</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="index/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="index/css/index.css">
 </head>
-<body>
+<body onload="showBlog()">
 <!--导航栏-->
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
+<nav class="navbar-inverse">
+    <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                     data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -20,7 +20,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">CodeOX</a>
+            <a class="navbar-brand">CodeOX</a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
@@ -34,14 +34,111 @@
                 <button type="submit" class="btn btn-default">Submit</button>
             </form>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/ueditor/">写博客&nbsp;<span class="glyphicon glyphicon-pencil" role="group"> </span>&nbsp;</a></li>
-                <li><a href="/user/login">登入&nbsp;<span class="glyphicon glyphicon-user" role="group"> </span>&nbsp;</a></li>
-                <li><a href="/user/register">注册&nbsp;<span class="glyphicon glyphicon-plus-sign" role="group"> </span>&nbsp;</a></li>
+                <li><a href="/ueditor/">写博客&nbsp;<span class="glyphicon glyphicon-pencil"
+                                                       role="group"> </span>&nbsp;</a></li>
+                <li><a href="/user/login">登入&nbsp;<span class="glyphicon glyphicon-user" role="group"> </span>&nbsp;</a>
+                </li>
+                <li><a href="/user/register">注册&nbsp;<span class="glyphicon glyphicon-plus-sign"
+                                                           role="group"> </span>&nbsp;</a>
+                </li>
             </ul>
         </div>
     </div>
 </nav>
-<script src="index/js/jquery-1.11.1.min.js"></script>
+<div class="container">
+    <div class="page-header">
+        <h1 class="word">CodeOX &nbsp;&nbsp;<small class="word">Write Down You Blog</small></h1>
+    </div>
+    <!--网站信息-->
+    <div class="row">
+        <div class="col-md-2" id="web_info">
+            <div class="panel panel-primary">
+                <div class="panel-heading">CodeOX Information</div>
+                <div class="panel-body">
+                    Panel content
+                </div>
+            </div>
+        </div>
+        <!--博文展示 -->
+        <div class="col-md-7" id=blog_list>
+        </div>
+        <!--排行版-->
+        <div class="col-md-3" id="Ranking_List">
+            <div>
+                <div class="panel panel-success">
+                    <div class="panel-heading">活跃用户</div>
+                    <div class="panel-body">
+                        Panel content
+                    </div>
+                </div>
+                <div class="panel panel-success">
+                    <div class="panel-heading">最火博文</div>
+                    <div class="panel-body">
+                        Panel content
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script  type="text/javascript" th :inline="javascript">
+    /*<![CDATA[*/
+    function showBlog() {
+        // var basePath = [[${#httpServletRequest.getScheme() + "://" + #httpServletRequest.getServerName() + ":" + #httpServletRequest.getServerPort() + #httpServletRequest.getContextPath()}]];
+        var blog_list = window.document.getElementById("blog_list");
+        var blog;
+        var blog_title;
+        var blog_preview;
+        var blog_modified_time;
+        var blog_author;
+        var blog_readers;
+        var blogList;
+        var blog_url;
+        var blog_id;
+        if (blog_list) {
+            $.ajax({
+                type: "get",
+                dataType: "json",
+                url: 'http://localhost:8083' + '/blog/list',
+                success: function (msg) {
+                    for (var i = 0; i < msg.length; i++) {
+                        blog = msg[i];
+                        blog_modified_time = blog.dateModified.toString().substr(0,10);
+                        blog_title = blog.title;
+                        console.log(blog_title);
+                        blog_preview = blog.preview;
+                        blog_author = blog.author.username;
+                        blog_readers = blog.readers;
+                        blog_id = blog.id;
+                        blog_url = "http://localhost:8083/blog/"+blog_id;
+                        var oneBlog = "<div class=\"panel panel-danger\">\n" +
+                            "  <div class=\"panel-heading\"><h5><a href="+blog_url+">" + blog_title + "<a/></h5></div>\n" +
+                            "  <div class=\"panel-body\">\n" +
+                            "    " + blog_preview + "\n" +
+                            "  </div>\n" +
+                            "   <div class=\"panel-footer\">\n" +
+                            "   <span class=\"label label-success\">作者</span>\n" +
+                            "   <span class=\"label label-info\">" + blog_author + "</span>\n" +
+                            "   <span class=\"label label-success\">发布时间</span>\n" +
+                            "   <span class=\"label label-info\">" + blog_modified_time + "</span>\n" +
+                            "   <span class=\"label label-success\">阅读次数<span class=\"badge\">" + blog_readers + "</span></span>\n" +
+                            "   </div>\n" +
+                            "</div>";
+                        blogList = blogList + oneBlog;
+                    }
+                    blog_list.innerHTML = blogList;
+                }
+            });
+        } else {
+            error: function error() {
+                alert("没有blog_title节点");
+            }
+        }
+    }
+    /*]]>*/
+</script>
+<script src="index/js/jquery-3.3.1.min.js"></script>
 <script src="index/bootstrap/js/bootstrap.min.js"></script>
 <script src="index/js/jquery.backstretch.min.js"></script>
 <script src="index/js/scripts.js"></script>

@@ -17,4 +17,10 @@ import org.springframework.stereotype.Component;
 public class TelephoneServiceImpl extends GenericManagerImpl<Telephone,Long> implements TelephoneService {
     @Autowired
     private TelePhoneRepository telePhoneRepository;
+
+    @Autowired
+    public void setTelePhoneRepository(TelePhoneRepository telePhoneRepository) {
+        this.telePhoneRepository = telePhoneRepository;
+        this.dao = this.telePhoneRepository;
+    }
 }

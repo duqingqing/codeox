@@ -22,7 +22,7 @@ public class Telephone extends BaseEntity {
     @Column(name = "telePhoneNumber",unique = true)
     private String telePhoneNumber;
 
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "userId")
     private User user;
 

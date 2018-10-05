@@ -1,0 +1,14 @@
+.word {
+    color: #fcfcfc;
+}
+
+.navbar-inverse {
+    border: 1px solid transparent;
+}
+
+.navbar-brand {
+    float: left;
+    height: 20px;
+    font-size: 20px;
+    line-height: 20px;
+}

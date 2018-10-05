@@ -6,7 +6,6 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.Calendar;
 
 /**
  * 用户拦截，通过判断session，拦截用户
@@ -23,8 +22,10 @@ public class UserInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        String  username = (String)request.getSession().getAttribute("usernaem");
-        if (!username.equals("")){
+        HttpSession session = request.getSession(false);
+
+        if (session != null && session.getAttribute("username") != null) {
+
             return true;  //通过拦截器，继续执行请求
         } else {
             response.sendRedirect(request.getContextPath()+"/user/login");

@@ -10,6 +10,7 @@ import com.codeox.log.codeox.domain.User;
 import com.codeox.log.codeox.repository.CommentRepository;
 import com.codeox.log.codeox.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 /**
@@ -20,8 +21,14 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class CommentServiceImpl extends GenericManagerImpl<Comment, Long> implements CommentService {
-    @Autowired
+
     private CommentRepository commentRepository;
+
+    @Autowired
+    public void setCommentRepository(CommentRepository commentRepository) {
+        this.commentRepository = commentRepository;
+        this.dao = this.commentRepository;
+    }
 
     /**
     * @Description: 添加评论

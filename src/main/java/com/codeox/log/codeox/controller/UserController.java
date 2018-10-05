@@ -1,5 +1,6 @@
 package com.codeox.log.codeox.controller;
 
+import com.codeox.log.codeox.base.controller.GenericController;
 import com.codeox.log.codeox.commen.enums.ResultEnum;
 import com.codeox.log.codeox.commen.password.PasswordTool;
 import com.codeox.log.codeox.commen.result.Result;
@@ -9,6 +10,7 @@ import com.codeox.log.codeox.service.UserService;
 import jdk.nashorn.internal.objects.annotations.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -27,13 +29,21 @@ import java.util.Map;
 @Controller
 @RequestMapping("/user")
 @Slf4j
-public class UserController {
+public class UserController extends GenericController<User, Long, UserService> {
+
+
+    private UserService userService;
+
 
     @Autowired
-    private UserService userService;
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+        this.manager = this.userService;
+    }
 
     /**
      * 拦截注册页面
+     *
      * @param modelAndView
      * @return
      */
@@ -45,6 +55,7 @@ public class UserController {
 
     /**
      * 拦截登入页面
+     *
      * @param modelAndView
      * @return
      */
@@ -57,6 +68,7 @@ public class UserController {
 
     /**
      * 用户首页
+     *
      * @param modelAndView
      * @param httpSession
      * @return

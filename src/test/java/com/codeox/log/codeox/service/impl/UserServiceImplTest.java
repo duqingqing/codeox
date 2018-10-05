@@ -36,16 +36,10 @@ public class UserServiceImplTest extends GenericGenerator {
     @Test
     public void testFindByUserName(){
         try {
-            User user = userService.fingUserByUserName("asdf");
+            User user = userService.fingUserByUserName("沐 晴");
             user.toString();
         }catch (NullPointerException nullPoint){
             System.out.println("你没有注册");
         }
-    }
-    @Test
-    public void testChangeTelephone(){
-        User user = userService.fingUserByUserName("杜清清");
-        Result result = userService.changeTelephone(user,"15093325428");
-        System.out.println(result);
     }
 }

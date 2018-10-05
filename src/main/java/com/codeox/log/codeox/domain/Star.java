@@ -27,7 +27,7 @@ public class Star extends BaseEntity{
     @JoinColumn(name="author_id")
     private User user;
 
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="article_id")
     private Blog blog;
 }

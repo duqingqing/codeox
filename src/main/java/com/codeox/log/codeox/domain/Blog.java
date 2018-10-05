@@ -23,13 +23,14 @@ public class Blog extends BaseEntity {
     private String title;
     @Column(name = "content", columnDefinition = "LONGTEXT")
     private String content;
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "authorId")
     private User author;
     @Column(name = "readers", columnDefinition = "bigint default 0")
     private long readers;
-
-    @ManyToOne
+    @Column(name = "preview", columnDefinition = "LONGTEXT")
+    private String preview;
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "category_id")
     private Category category;
 

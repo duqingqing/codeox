@@ -11,9 +11,11 @@ import com.codeox.log.codeox.repository.TelePhoneRepository;
 import com.codeox.log.codeox.repository.UserRepository;
 import com.codeox.log.codeox.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 /**
  * @autor : duqingqing
@@ -24,17 +26,30 @@ import javax.transaction.Transactional;
 @Component
 @Transactional
 public class UserServiceImpl extends GenericManagerImpl<User, Long> implements UserService {
-    @Autowired
+
     UserRepository userRepository;
-    @Autowired
+
     TelePhoneRepository telePhoneRepository;
 
+    @Autowired
+    public void setUserRepository(UserRepository userRepository) {
+        this.userRepository = userRepository;
+        this.dao = this.userRepository;
+    }
+
+    @Autowired
+    public void setTelePhoneRepository(TelePhoneRepository telePhoneRepository) {
+        this.telePhoneRepository = telePhoneRepository;
+    }
+
     /**
-    * @Description: 添加用户
-    * @Param: String username, String password, String telePhoneNumber
-    * @return: Result
-    * @Date: 2018/9/30 0030
-    */ 
+     * @Description: 添加用户
+     * @Param: String username, String password, String telePhoneNumber
+     * @return: Result
+     * @Date: 2018/9/30 0030
+     */
+
+
     @Override
     public Result addUser(String username, String password, String telePhoneNumber) {
         PasswordTool passwordTool = new PasswordTool();
@@ -54,21 +69,22 @@ public class UserServiceImpl extends GenericManagerImpl<User, Long> implements U
     }
 
     /**
-    * @Description: 通过名字查找用户
-    * @Param: String username
-    * @return: User
-    * @Date: 2018/9/30 0030
-    */ 
+     * @Description: 通过名字查找用户
+     * @Param: String username
+     * @return: User
+     * @Date: 2018/9/30 0030
+     */
     @Override
     public User fingUserByUserName(String username) {
         return userRepository.findByUsername(username);
     }
+
     /**
-    * @Description: 用户修改电话号码，通过telephone.delete 来存储电话号码的状态
-    * @Param: User user, String newTelephoneNumber : 新的电话号码
-    * @return: Result
-    * @Date: 2018/9/30 0030
-    */
+     * @Description: 用户修改电话号码，通过telephone.delete 来存储电话号码的状态
+     * @Param: User user, String newTelephoneNumber : 新的电话号码
+     * @return: Result
+     * @Date: 2018/9/30 0030
+     */
     @Override
     @Transactional
     public Result changeTelephone(User user, String newTelephoneNumber) {

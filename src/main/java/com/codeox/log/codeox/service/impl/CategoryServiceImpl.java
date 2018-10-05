@@ -18,8 +18,14 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class CategoryServiceImpl extends GenericManagerImpl<Category, Long> implements CategoryService {
-    @Autowired
+
     private CategoryRepository categoryRepository;
+
+    @Autowired
+    public void setCategoryRepository(CategoryRepository categoryRepository) {
+        this.categoryRepository = categoryRepository;
+        this.dao = this.categoryRepository;
+    }
 
     /**
      * @Description: 添加博客分类
