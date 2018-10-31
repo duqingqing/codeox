@@ -7,9 +7,9 @@ spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     #这里加上后缀用来防止mysql乱码,serverTimezone=GMT%2b8设置时区ENC()是固定写法
-    url: ENC(5LgivIIO45sMSbNi369lvFw+QJ7m87P1gWRrbdzlzPtVPBnA2JSDIbXsCaZGlCDlmfGd2mN2BFe1k5CFBKSSeYLf9L59qBKX0r/qd8PkZoKIKqpv4Qnh4+dS/MbmZ60SP8SqwzEZzcc=)
-    username: ENC(x496f7liyU1UXDcZZOXM1g==)
-    password: ENC(ze6P1C9FCfFUUoNX64JR0w==)
+    url: jdbc:mysql://127.0.0.1:3306/codeox?characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2b8
+    username: dqq
+    password: dqq
   jpa:
     hibernate:
       ddl-auto: update
@@ -33,3 +33,5 @@ server:
 servlet:
     session:
       timeout: 60s
+codeox:
+  imagePath: /home/dqq/fileUpload/
