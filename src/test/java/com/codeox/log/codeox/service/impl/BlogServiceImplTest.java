@@ -63,41 +63,40 @@ public class BlogServiceImplTest extends GenericGenerator {
         Blog blog = blogService.findById((long)1);
         System.out.println(blog.getTitle());
     }
-//    @Test
-//    public void addBlogTestBySpider(){
-//        Document document = null;
-//        Document document1 = null;
-//        String goal = "https://www.csdn.net/nav/iot";
-//        document = GetDocument.connect(goal);
-//        for(int i=1;i<300;i++){
-//            Elements titleElement = document.select("#feedlist_id > li:nth-child("+i+") > div > div.title > h2 > a");
-//            String author = document.select("#feedlist_id > li:nth-child("+i+") > div > dl > dd.name > a").text();
-//            String title  = titleElement.text();
-//            String title_href = titleElement.attr("href");
-//
-//            System.out.println(title);
-//            System.out.println(author);
-//            System.out.println(title_href);
-//            try {
-//                document1 = GetDocument.connect(title_href);
-//                String content = document1.select("#article_content").html();
-//
-//                Result result1 = userService.addUser(author, "12345678", "1329876080" + i);
-//                User author2= userService.fingUserByUserName(author);
-//                Result result2 = blogService.addBlog(author2, title, content);
-//                log.info( result1.toString()+"------"+result2.toString());
-//                try {
-//                    Thread.sleep(3000);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//                System.out.println("--------------------------------------------------");
-//            }catch (Exception e){
-//                continue;
-//            }
-//        }
-//
-//    }
+    @Test
+    public void addBlogTestBySpider(){
+        Document document = null;
+        Document document1 = null;
+        String goal = "https://www.csdn.net/nav/db";
+        document = GetDocument.connect(goal);
+        for(int i=1;i<300;i++){
+            Elements titleElement = document.select("#feedlist_id > li:nth-child("+i+") > div > div.title > h2 > a");
+            String author = document.select("#feedlist_id > li:nth-child("+i+") > div > dl > dd.name > a").text();
+            String title  = titleElement.text();
+            String title_href = titleElement.attr("href");
+
+            System.out.println(title);
+            System.out.println(author);
+            System.out.println(title_href);
+            try {
+                document1 = GetDocument.connect(title_href);
+                String content = document1.select("#article_content").html();
+                Result result1 = userService.addUser(author, "12345678", "1329876080" + i);
+                User author2= userService.fingUserByUserName(author);
+                Result result2 = blogService.addBlog(author2, title, content);
+                log.info( result1.toString()+"------"+result2.toString());
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                System.out.println("--------------------------------------------------");
+            }catch (Exception e){
+                continue;
+            }
+        }
+
+    }
 
 
     /**

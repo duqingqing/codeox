@@ -17,9 +17,9 @@ public class CodeoxApplicationTests {
 
     @Test
     public void getPass() {
-        String url = encryptor.encrypt("jdbc:mysql://0.0.0.0:3306/AAA?characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2b8");
-        String name = encryptor.encrypt("");
-        String password = encryptor.encrypt("");
+        String url = encryptor.encrypt("jdbc:mysql://0.0.0.0:3306/codeox?characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2b8");
+        String name = encryptor.encrypt("dqq");
+        String password = encryptor.encrypt("dqq");
         System.out.println(url + "----------------");
         System.out.println(name + "----------------");
         System.out.println(password + "----------------");
