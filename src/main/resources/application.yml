@@ -26,7 +26,6 @@ spring:
   mvc:
     static-path-pattern: /**
 
-
 server:
   port: 8083
 
@@ -35,3 +34,5 @@ servlet:
       timeout: 60s
 codeox:
   imagePath: /home/dqq/fileUpload/
+  admin.name: codeoxadmin
+  admin.password: codeoxadmin

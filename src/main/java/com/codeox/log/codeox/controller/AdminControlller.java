@@ -8,6 +8,7 @@ import com.codeox.log.codeox.domain.Admin;
 import com.codeox.log.codeox.service.AdminService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +34,7 @@ import java.util.Map;
 public class AdminControlller {
     @Autowired
     private AdminService adminService;
+
 
     /**
      * @Description: 管理员首页, 通过session判断登入状态

@@ -7,8 +7,8 @@ import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
+import java.security.NoSuchProviderException;
 import java.security.SecureRandom;
-import java.util.logging.Logger;
 
 /**
  * @autor : duqingqing
@@ -62,9 +62,16 @@ public class EncodeAndDecode {
             }
             //1.构造密钥生成器，指定为AES算法,不区分大小写
             KeyGenerator kgen = KeyGenerator.getInstance(KEY_AES);
+            SecureRandom secureRandom = null;
+            try{
+                secureRandom = SecureRandom.getInstance("SHA1PRNG","SUN");
+            }catch (NoSuchProviderException e){
+                e.printStackTrace();
+            }
+            secureRandom.setSeed(key.getBytes());
             //2.根据ecnodeRules规则初始化密钥生成器
             //生成一个128位的随机源,根据传入的字节数组
-            kgen.init(128, new SecureRandom(key.getBytes()));
+            kgen.init(128,secureRandom);
             //3.产生原始对称密钥
             SecretKey secretKey = kgen.generateKey();
             //4.获得原始对称密钥的字节数组
