@@ -12,6 +12,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * @Auther: duqingqing
  * @Date: 18-11-13 20:24
@@ -32,10 +34,13 @@ public class InitRunner extends GenericGenerator implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Admin admin = new Admin();
-        PasswordTool passwordTool = new PasswordTool();
-        String encodePassword =  passwordTool.encodePassword(password);
-        Result result =  adminService.addAdmin(adminName,encodePassword);
-        log.info("init web service result = "+result);
+        List<Admin> adminList = adminService.findAll();
+        if(adminList.size()==0) {
+            Admin admin = new Admin();
+            PasswordTool passwordTool = new PasswordTool();
+            String encodePassword = passwordTool.encodePassword(password);
+            Result result = adminService.addAdmin(adminName, encodePassword);
+            log.info("init web service result = " + result);
+        }
     }
 }
