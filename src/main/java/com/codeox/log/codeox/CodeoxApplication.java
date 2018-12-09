@@ -7,9 +7,7 @@ import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
 import org.springframework.scheduling.annotation.EnableAsync;
 
 @SpringBootApplication
-@EnableAsync
 public class CodeoxApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(CodeoxApplication.class, args);
     }

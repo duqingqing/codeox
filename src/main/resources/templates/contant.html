@@ -1,10 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title id="blog_title"></title>
 </head>
 <body>
-$END$
+<div id="blog_content">
+
+</div>
 </body>
+<script>
+    window.onload = function () {
+        var number = localStorage.getItem('contantId');
+        var content;
+        var title;
+        var blog_title = document.getElementById("blog_title");
+        var blog_content = document.getElementById("blog_content");
+        $.ajax({
+            type: "get",
+            dataType: "json",
+            url: 'http://localhost:8083' + '/blog/' + number,
+            success: function (msg) {
+                title = msg.title;
+                content = msg.content;
+                blog_title.innerText=title;
+                blog_content.innerHTML=content;
+            }
+        });
+    }
+</script>
+<script th:src="@{/index/js/jquery-3.3.1.min.js}"></script>
 </html>

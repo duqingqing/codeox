@@ -2,11 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>CodeOX-Index</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" th:href="@{/index/bootstrap/css/bootstrap.css}">
-    <link rel="stylesheet" th:href="@{/index/css/index.css}">
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link  href="../static/index/bootstrap/css/bootstrap.css" th:href="@{/index/bootstrap/css/bootstrap.css}" rel="stylesheet" />
+    <link href="../static/index/css/index.css" th:href="@{/index/css/index.css}" rel="stylesheet" />
 </head>
 <body onload="showBlog()">
 <!--导航栏-->
@@ -84,6 +84,11 @@
 </div>
 <script  type="text/javascript" th :inline="javascript">
     /*<![CDATA[*/
+    function getContant(id) {
+        console.log(id)
+        window.location.href="/contant"
+        localStorage.setItem('contantId', id)
+    }
     function showBlog() {
         // var basePath = [[${#httpServletRequest.getScheme() + "://" + #httpServletRequest.getServerName() + ":" + #httpServletRequest.getServerPort() + #httpServletRequest.getContextPath()}]];
         var blog_list = window.document.getElementById("blog_list");
@@ -112,8 +117,8 @@
                         blog_readers = blog.readers;
                         blog_id = blog.id;
                         blog_url = "http://localhost:8083/blog/"+blog_id;
-                        var oneBlog = "<div class=\"panel panel-danger\">\n" +
-                            "  <div class=\"panel-heading\"><h5><a href="+blog_url+">" + blog_title + "<a/></h5></div>\n" +
+                        var oneBlog = "<div class=\"panel panel-info\">\n" +
+                            "  <div class=\"panel-heading\"><h5><div onclick='getContant("+blog_id+")'>" + blog_title + "<div/></h5></div>\n" +
                             "  <div class=\"panel-body\">\n" +
                             "    " + blog_preview + "\n" +
                             "  </div>\n" +
@@ -136,7 +141,6 @@
             }
         }
     }
-    /*]]>*/
 </script>
 <script th:src="@{/index/js/jquery-3.3.1.min.js}"></script>
 <script th:src="@{/index/bootstrap/js/bootstrap.min.js}"></script>

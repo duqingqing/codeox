@@ -7,7 +7,7 @@ spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     #这里加上后缀用来防止mysql乱码,serverTimezone=GMT%2b8设置时区ENC()是固定写法
-    url: jdbc:mysql://127.0.0.1:3306/codeox?characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2b8
+    url: jdbc:mysql://127.0.0.1:3306/codeox?characterEncoding=utf8&useSSL=true&serverTimezone=GMT%2b8
     username: dqq
     password: dqq
   jpa:
@@ -22,7 +22,7 @@ spring:
     suffix: .html
     enabled: true
     encoding: utf-8
-    mode: HTML5
+    mode: LEGACYHTML5
   mvc:
     static-path-pattern: /**
 

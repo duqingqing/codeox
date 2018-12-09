@@ -4,6 +4,7 @@ import com.codeox.log.codeox.base.controller.GenericController;
 import com.codeox.log.codeox.domain.Blog;
 import com.codeox.log.codeox.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -15,7 +16,7 @@ import java.util.List;
  * @time: 11:25
  * @package: com.codeox.log.codeox.controller
  */
-@RestController
+@Controller
 @RequestMapping("/blog")
 public class BlogController extends GenericController<Blog, Long, BlogService> {
     private BlogService blogService;
@@ -26,7 +27,8 @@ public class BlogController extends GenericController<Blog, Long, BlogService> {
         this.manager = this.blogService;
     }
 
-    @GetMapping("/list")
+    @RequestMapping(value = "/list", method = RequestMethod.GET, produces = "application/json")
+    @ResponseBody
     public List<Blog> getList(){
         List<Blog> blogList = blogService.findAll();
         return blogList;
