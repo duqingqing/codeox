@@ -5,6 +5,7 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="Shortcut Icon" th:href="@{/index/img/pen.png}" />
     <link  href="../static/index/bootstrap/css/bootstrap.css" th:href="@{/index/bootstrap/css/bootstrap.css}" rel="stylesheet" />
     <link href="../static/index/css/index.css" th:href="@{/index/css/index.css}" rel="stylesheet" />
 </head>
@@ -24,8 +25,8 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">首页<span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;
-                <li><a href="#"><span class="glyphicon glyphicon-user">我的博客</span> &nbsp;&nbsp;</a></li>
+                <li class="active"><a href="/index">首页<span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;
+                <li><a href="/user/index"><span class="glyphicon glyphicon-user">我的博客</span> &nbsp;&nbsp;</a></li>
             </ul>
             <form class="navbar-form navbar-left">
                 <div class="form-group">
@@ -83,6 +84,15 @@
 
 </div>
 <script  type="text/javascript" th :inline="javascript">
+    if(window.name!="codeoxindex"){
+        location.reload();
+        window.name = "codeoxindex";
+    }else{
+        window.name="";
+    }
+
+
+
     /*<![CDATA[*/
     function getContant(id) {
         console.log(id)
