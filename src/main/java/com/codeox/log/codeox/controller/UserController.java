@@ -49,7 +49,7 @@ public class UserController extends GenericController<User, Long, UserService> {
      */
     @GetMapping("/register")
     public ModelAndView registerPage(ModelAndView modelAndView) {
-        modelAndView.setViewName("/user/register");
+        modelAndView.setViewName("user/register");
         return modelAndView;
     }
 
@@ -62,7 +62,7 @@ public class UserController extends GenericController<User, Long, UserService> {
 
     @GetMapping("/login")
     public ModelAndView loginPage(ModelAndView modelAndView) {
-        modelAndView.setViewName("/user/login");
+        modelAndView.setViewName("user/login");
         return modelAndView;
     }
 
@@ -107,7 +107,7 @@ public class UserController extends GenericController<User, Long, UserService> {
             }
             modelAndView.setViewName("redirect:/user/login");
         } else {
-            modelAndView.setViewName("/user/register");
+            modelAndView.setViewName("user/register");
         }
         return modelAndView;
     }
@@ -160,7 +160,7 @@ public class UserController extends GenericController<User, Long, UserService> {
     @GetMapping("/logout")
     public ModelAndView quit(ModelAndView modelAndView, HttpSession httpSession) {
         httpSession.removeAttribute("username");
-        modelAndView.setViewName("redirect:/user/login");
+        modelAndView.setViewName("redirect:user/login");
         return modelAndView;
     }
 }

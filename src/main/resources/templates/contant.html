@@ -19,7 +19,7 @@
         $.ajax({
             type: "get",
             dataType: "json",
-            url: 'http://localhost:8083' + '/blog/' + number,
+            url: 'http://10.36.20.12:8083' + '/blog/' + number,
             success: function (msg) {
                 title = msg.title;
                 content = msg.content;

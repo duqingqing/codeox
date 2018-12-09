@@ -3,13 +3,15 @@ jasypt:
   encryptor:
     password: EbfYkitulv73I2p0mXI50JMXoaxZTKJ7
 spring:
+  resources:
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
   #数据库相关配置
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     #这里加上后缀用来防止mysql乱码,serverTimezone=GMT%2b8设置时区ENC()是固定写法
-    url: jdbc:mysql://127.0.0.1:3306/codeox?characterEncoding=utf8&useSSL=true&serverTimezone=GMT%2b8
+    url: jdbc:mysql://106.12.210.63:3306/codeox?characterEncoding=utf8&useSSL=true&serverTimezone=GMT%2b8
     username: dqq
-    password: dqq
+    password: admin
   jpa:
     hibernate:
       ddl-auto: update

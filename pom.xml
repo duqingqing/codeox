@@ -129,6 +129,16 @@
     </dependencies>
 
     <build>
+        <finalName>codeox</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+            <resource>
+                <directory>src/main/webapp</directory>
+                <targetPath>META-INF/resources</targetPath>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -136,4 +146,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>

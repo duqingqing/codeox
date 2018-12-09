@@ -115,7 +115,7 @@
             $.ajax({
                 type: "get",
                 dataType: "json",
-                url: 'http://localhost:8083' + '/blog/list',
+                url: 'http://106.12.210.63:8083' + '/blog/list',
                 success: function (msg) {
                     for (var i = 0; i < msg.length; i++) {
                         blog = msg[i];
@@ -126,7 +126,7 @@
                         blog_author = blog.author.username;
                         blog_readers = blog.readers;
                         blog_id = blog.id;
-                        blog_url = "http://localhost:8083/blog/"+blog_id;
+                        blog_url = "http://10.36.20.12:8083/blog/"+blog_id;
                         var oneBlog = "<div class=\"panel panel-info\">\n" +
                             "  <div class=\"panel-heading\"><h5><div onclick='getContant("+blog_id+")'>" + blog_title + "<div/></h5></div>\n" +
                             "  <div class=\"panel-body\">\n" +
