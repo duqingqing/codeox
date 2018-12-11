@@ -7,15 +7,12 @@ import com.codeox.log.codeox.commen.result.Result;
 import com.codeox.log.codeox.commen.result.ResultUtil;
 import com.codeox.log.codeox.domain.User;
 import com.codeox.log.codeox.service.UserService;
-import jdk.nashorn.internal.objects.annotations.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.jws.WebParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Map;

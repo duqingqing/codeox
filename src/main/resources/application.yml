@@ -29,7 +29,7 @@ spring:
     static-path-pattern: /**
 
 server:
-  port: 8083
+  port: 6001
 
 servlet:
     session:

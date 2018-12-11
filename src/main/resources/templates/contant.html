@@ -11,6 +11,7 @@
 </body>
 <script>
     window.onload = function () {
+        var host="http://127.0.0.1:6001/";
         var number = localStorage.getItem('contantId');
         var content;
         var title;
@@ -19,7 +20,7 @@
         $.ajax({
             type: "get",
             dataType: "json",
-            url: 'http://10.36.20.12:8083' + '/blog/' + number,
+            url: host + 'blog/' + number,
             success: function (msg) {
                 title = msg.title;
                 content = msg.content;

@@ -67,7 +67,7 @@ public class BlogServiceImplTest extends GenericGenerator {
     public void addBlogTestBySpider(){
         Document document = null;
         Document document1 = null;
-        String goal = "https://blog.csdn.net/nav/arch";
+        String goal = "https://blockchain.csdn.net/";
         document = GetDocument.connect(goal);
         for(int i=1;i<300;i++){
             Elements titleElement = document.select("#feedlist_id > li:nth-child("+i+") > div > div.title > h2 > a");
@@ -81,7 +81,7 @@ public class BlogServiceImplTest extends GenericGenerator {
             try {
                 document1 = GetDocument.connect(title_href);
                 String content = document1.select("#article_content").html();
-                Result result1 = userService.addUser(author, "12345678", "1379876080" + i);
+                Result result1 = userService.addUser(author, "12345678", "1039876080" + i);
                 User author2= userService.fingUserByUserName(author);
                 Result result2 = blogService.addBlog(author2, title, content);
                 log.info( result1.toString()+"------"+result2.toString());

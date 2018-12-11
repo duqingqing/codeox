@@ -62,6 +62,7 @@
         </div>
         <!--博文展示 -->
         <div class="col-md-7" id=blog_list>
+
         </div>
         <!--排行版-->
         <div class="col-md-3" id="Ranking_List">
@@ -102,6 +103,7 @@
     function showBlog() {
         // var basePath = [[${#httpServletRequest.getScheme() + "://" + #httpServletRequest.getServerName() + ":" + #httpServletRequest.getServerPort() + #httpServletRequest.getContextPath()}]];
         var blog_list = window.document.getElementById("blog_list");
+        var host="http://127.0.0.1:6001/";
         var blog;
         var blog_title;
         var blog_preview;
@@ -111,14 +113,19 @@
         var blogList;
         var blog_url;
         var blog_id;
+        var page_numbers =1;
+        var page_limit=10;
+        console.log(host + 'blog/?page='+page_numbers+'&limit='+page_limit);
         if (blog_list) {
             $.ajax({
                 type: "get",
                 dataType: "json",
-                url: 'http://106.12.210.63:8083' + '/blog/list',
+                url: host + 'blog/?page='+page_numbers+'&limit='+page_limit,
                 success: function (msg) {
-                    for (var i = 0; i < msg.length; i++) {
-                        blog = msg[i];
+                    var content = msg.content;
+                    console.log(content);
+                    for (var i = 0; i < content.length; i++) {
+                        blog = content[i];
                         blog_modified_time = blog.dateModified.toString().substr(0,10);
                         blog_title = blog.title;
                         console.log(blog_title);
@@ -126,7 +133,7 @@
                         blog_author = blog.author.username;
                         blog_readers = blog.readers;
                         blog_id = blog.id;
-                        blog_url = "http://10.36.20.12:8083/blog/"+blog_id;
+                        blog_url = host + "blog/"+blog_id;
                         var oneBlog = "<div class=\"panel panel-info\">\n" +
                             "  <div class=\"panel-heading\"><h5><div onclick='getContant("+blog_id+")'>" + blog_title + "<div/></h5></div>\n" +
                             "  <div class=\"panel-body\">\n" +
@@ -142,6 +149,8 @@
                             "</div>";
                         blogList = blogList + oneBlog;
                     }
+//                    var page_button  = "<button type=\"button\" class=\"btn btn-success\">更多</button>";
+//                    blog_list = blog_list + page_button;
                     blog_list.innerHTML = blogList;
                 }
             });
